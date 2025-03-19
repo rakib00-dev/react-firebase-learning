@@ -17,8 +17,8 @@ const SignIn = () => {
       <label htmlFor="email">Enter your Email</label>
       <input
         type="email"
-        name="email"
-        id="email"
+        name="signin email"
+        id="signin email"
         required
         onChange={(e) => setEmail(e.target.value)}
         value={email}
@@ -27,8 +27,8 @@ const SignIn = () => {
       <label htmlFor="password">Enter your Password</label>
       <input
         type="password"
-        name="password"
-        id="password"
+        name="signin  password"
+        id="signin password"
         required
         onChange={(e) => setPassword(e.target.value)}
         value={password}
