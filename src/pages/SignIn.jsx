@@ -1,20 +1,20 @@
-import { app } from '../firebase';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { app } from '../firebase';
 
-const SignUp = () => {
+const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const createUser = () => {
-    createUserWithEmailAndPassword(getAuth(app), email, password).then(
-      (value) => alert('success')
+  const signInUser = () => {
+    signInWithEmailAndPassword(getAuth(app), email, password).then((value) =>
+      alert('success')
     );
   };
   return (
-    <div className="signup-page">
-      <h1>SignUp Page</h1>
-      <label htmlFor="email">Email</label>
+    <div className="signin-page">
+      <h1>SignIn Page</h1>
+      <label htmlFor="email">Enter your Email</label>
       <input
         type="email"
         name="email"
@@ -24,7 +24,7 @@ const SignUp = () => {
         value={email}
       />
 
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password">Enter your Password</label>
       <input
         type="password"
         name="password"
@@ -33,9 +33,9 @@ const SignUp = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      <button onClick={createUser}>submit</button>
+      <button onClick={signInUser}>submit</button>
     </div>
   );
 };
 
-export default SignUp;
+export default SignIn;
