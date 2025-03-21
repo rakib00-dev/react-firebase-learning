@@ -5,7 +5,7 @@ import {
   getAuth,
   reauthenticateWithCredential,
 } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React from 'react';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_apiKey,
@@ -20,7 +20,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 const firebaseAuth = getAuth(firebaseApp);
-const database = getDatabase(firebaseApp);
+export const database = getDatabase(firebaseApp);
 
 export const FirebaseContext = React.createContext(null);
 
@@ -33,13 +33,13 @@ export const FirebaseProvider = ({ children }) => {
     return createUserWithEmailAndPassword(firebaseAuth, email, password);
   };
 
-  const putSomeDataToFirebase = (key, data) => {
-    return set(ref(database, key, data));
+  const putData = (key, data) => {
+    return set(ref(database, `users/${key}`), data);
   };
 
   return (
     <FirebaseContext.Provider
-      value={{ signUpUserWithEmailAndPassword, putSomeDataToFirebase }}
+      value={{ signUpUserWithEmailAndPassword, putData }}
     >
       {children}
     </FirebaseContext.Provider>
