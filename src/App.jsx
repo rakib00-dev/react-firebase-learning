@@ -35,9 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>
-        hello {user.email} & your id is {user.uid.slice(0, 5) + '...'}
-      </h1>
+      <h1>hello {user.email} welcome</h1>
       <button onClick={() => signOut(auth)}>logout</button>
     </div>
   );
