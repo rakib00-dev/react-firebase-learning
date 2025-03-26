@@ -20,6 +20,10 @@ const SignUp = () => {
     );
   };
 
+  const signUpWithGoogle = () => {
+    signInWithPopup(auth, googleProvider);
+  };
+
   return (
     <div className="signup-page">
       <h1>SignUp Page</h1>
@@ -44,9 +48,7 @@ const SignUp = () => {
       />
       <br />
       <button onClick={createUser}>Signup</button>
-      <button onClick={() => signInWithPopup(auth, googleProvider)}>
-        Signup with google
-      </button>
+      <button onClick={() => signUpWithGoogle}>Signup with google</button>
     </div>
   );
 };
