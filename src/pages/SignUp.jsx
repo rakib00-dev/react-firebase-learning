@@ -33,7 +33,9 @@ const SignUp = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      <button onClick={createUser}>submit</button>
+      <br />
+      <button onClick={createUser}>Signup</button>
+      <button>Signin with google</button>
     </div>
   );
 };

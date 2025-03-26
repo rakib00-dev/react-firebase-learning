@@ -1,42 +1,44 @@
 import './app.css';
 import SignUp from './pages/Signup';
 import SignIn from './pages/SignIn';
-import { database, useFirebase } from './context/Firebase';
-import React from 'react';
-import { ref, set } from 'firebase/database';
+import React, { useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { app } from './firebase';
+
+const auth = getAuth(app);
 
 function App() {
-  const firebase = useFirebase();
+  const [user, setUser] = useState(null);
 
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        console.log('you are logged out');
+
+        setUser(null);
+      }
+    });
+  }, []);
+
+  console.log(user);
+
+  if (user === null) {
+    return (
+      <>
+        <SignUp />
+        <SignIn />
+      </>
+    );
+  }
 
   return (
     <div className="App">
-      <input
-        type="email"
-        placeholder="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          firebase.signUpUserWithEmailAndPassword(email, password);
-          firebase.putData(email.split('@')[0], { email, password });
-        }}
-      >
-        Put Data
-      </button>
-      {/* <SignUp /> */}
-      {/* <SignIn /> */}
+      <h1>
+        hello {user.email} & your id is {user.uid.slice(0.5) + '...'}
+      </h1>
+      <button onClick={() => signOut(auth)}>logout</button>
     </div>
   );
 }
