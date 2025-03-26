@@ -1,16 +1,25 @@
 import { app } from '../firebase';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from 'firebase/auth';
 import { useState } from 'react';
+
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const createUser = () => {
-    createUserWithEmailAndPassword(getAuth(app), email, password).then(
-      (value) => alert('success')
+    createUserWithEmailAndPassword(auth, email, password).then((value) =>
+      alert('success')
     );
   };
+
   return (
     <div className="signup-page">
       <h1>SignUp Page</h1>
@@ -35,7 +44,9 @@ const SignUp = () => {
       />
       <br />
       <button onClick={createUser}>Signup</button>
-      <button>Signin with google</button>
+      <button onClick={() => signInWithPopup(auth, googleProvider)}>
+        Signup with google
+      </button>
     </div>
   );
 };
