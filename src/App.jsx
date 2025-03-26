@@ -16,13 +16,14 @@ function App() {
         setUser(user);
       } else {
         console.log('you are logged out');
-
         setUser(null);
       }
     });
   }, []);
 
-  console.log(user);
+  const deleteUser = () => {
+    user.delete().then(console.log('your account deleted successfully'));
+  };
 
   if (user === null) {
     return (
@@ -37,6 +38,7 @@ function App() {
     <div className="App">
       <h1>hello {user.email} welcome</h1>
       <button onClick={() => signOut(auth)}>logout</button>
+      <button onClick={deleteUser}>delete account</button>
     </div>
   );
 }

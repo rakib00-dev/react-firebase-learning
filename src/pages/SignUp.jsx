@@ -48,7 +48,7 @@ const SignUp = () => {
       />
       <br />
       <button onClick={createUser}>Signup</button>
-      <button onClick={() => signUpWithGoogle}>Signup with google</button>
+      <button onClick={signUpWithGoogle}>Signup with google</button>
     </div>
   );
 };
