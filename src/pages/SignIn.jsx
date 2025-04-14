@@ -11,6 +11,7 @@ const SignIn = () => {
       alert('success')
     );
   };
+
   return (
     <div className="signin-page">
       <h1>SignIn Page</h1>
