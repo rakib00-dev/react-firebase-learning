@@ -15,7 +15,7 @@ const SignIn = () => {
   return (
     <div className="signin-page">
       <h1>SignIn Page</h1>
-      <label htmlFor="email">Enter Your Email</label>
+      <label htmlFor="email">Enter your Email</label>
       <input
         type="email"
         name="signin email"
