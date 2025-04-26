@@ -1,16 +1,16 @@
 import './app.css';
 import SignUp from './pages/Signup';
 import SignIn from './pages/SignIn';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { app } from './firebase';
 
 const auth = getAuth(app);
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = React.useState(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
