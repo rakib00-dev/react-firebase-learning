@@ -1,10 +1,10 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useState } from 'react';
+import React from 'react';
 import { app } from '../firebase';
 
 const SignIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const signInUser = () => {
     signInWithEmailAndPassword(getAuth(app), email, password).then((value) =>
