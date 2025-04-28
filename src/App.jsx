@@ -47,14 +47,16 @@ function App() {
 
   const getDocumentsByQuery = async () => {
     const docsQuery = query(
-      collection(firestoreDB, 'cities/yGVkcgri4uiXgd8jJYx3/places'),
-      where('name', '==', 'Rangpur Polytechnic Institute')
+      collection(firestoreDB, 'users'),
+      where('isMale', '==', true)
     );
 
     const gettingDocs = await getDocs(docsQuery);
 
+    console.log(gettingDocs);
+
     gettingDocs.forEach((doc) => {
-      console.log(doc.id, ' => ', doc.data().pinCode);
+      console.log(doc.data());
     });
   };
 
