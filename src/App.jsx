@@ -47,8 +47,8 @@ function App() {
 
   const getDocumentsByQuery = async () => {
     const docsQuery = query(
-      collection(firestoreDB, 'users'),
-      where('isMale', '==', true)
+      collection(firestoreDB, 'users/RtP1VgMC2R3Y8v8GKjZn/purchases'),
+      where('Price', '!=', Infinity)
     );
 
     const gettingDocs = await getDocs(docsQuery);
