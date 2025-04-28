@@ -1,7 +1,15 @@
 import './App.css';
 import React from 'react';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  addDoc,
+  query,
+  getDocs,
+  where,
+  collection,
+  getFirestore,
+} from 'firebase/firestore';
 import { app } from './firebase';
 
 const firestoreDB = getFirestore(app);
@@ -28,10 +36,34 @@ function App() {
     console.log({ place });
   };
 
+  const getDocument = async () => {
+    const ref = doc(
+      firestoreDB,
+      'cities/yGVkcgri4uiXgd8jJYx3/places/ohk6Je1r4hQ8ZryDI1k7'
+    );
+    const snap = await getDoc(ref);
+    console.log(snap.data());
+  };
+
+  const getDocumentsByQuery = async () => {
+    const docsQuery = query(
+      collection(firestoreDB, 'cities/yGVkcgri4uiXgd8jJYx3/places'),
+      where('name', '==', 'Rangpur Polytechnic Institute')
+    );
+
+    const gettingDocs = await getDocs(docsQuery);
+
+    gettingDocs.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data().pinCode);
+    });
+  };
+
   return (
     <div className="App">
       <button onClick={writeData}>Add data</button>
       <button onClick={makeSubData}>Put sub data</button>
+      <button onClick={getDocument}>Get data</button>
+      <button onClick={getDocumentsByQuery}>Getting data by query</button>
     </div>
   );
 }
