@@ -1,22 +1,37 @@
-import './app.css';
-import SignUp from './pages/Signup';
-import SignIn from './pages/SignIn';
+import './App.css';
 import React from 'react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import { app } from './firebase';
 
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-console.log(db);
+const firestoreDB = getFirestore(app);
 
 function App() {
+  const writeData = async () => {
+    const result = await addDoc(collection(firestoreDB, '/cities'), {
+      name: 'Rajshahi',
+      pinCode: 123,
+      lat: 456,
+      long: 789,
+    });
+    console.log('Result:', result);
+  };
+
+  const makeSubData = async () => {
+    const place = await addDoc(
+      collection(firestoreDB, '/cities/yGVkcgri4uiXgd8jJYx3/places'),
+      {
+        name: 'Rangpur Polytechnic Institute',
+        date: Date.now(),
+      }
+    );
+    console.log({ place });
+  };
+
   return (
     <div className="App">
-      <button onClick={() => signOut(auth)}>logout</button>
-      <button onClick={deleteUser}>delete account</button>
+      <button onClick={writeData}>Add data</button>
+      <button onClick={makeSubData}>Put sub data</button>
     </div>
   );
 }
