@@ -60,12 +60,22 @@ function App() {
     });
   };
 
+  const update = async () => {
+    const docRef = doc(firestoreDB, 'cities', 'GzoV5dwCZs8RAC15YKzi');
+    const res = await updateDoc(docRef, {
+      name: 'new Rajshahi',
+      visited: false,
+    });
+    console.log(res);
+  };
+
   return (
     <div className="App">
       <button onClick={writeData}>Add data</button>
       <button onClick={makeSubData}>Put sub data</button>
       <button onClick={getDocument}>Get data</button>
       <button onClick={getDocumentsByQuery}>Getting data by query</button>
+      <button onClick={update}>Update city docs</button>
     </div>
   );
 }
