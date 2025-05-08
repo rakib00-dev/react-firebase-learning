@@ -9,9 +9,9 @@ import {
   where,
   collection,
   getFirestore,
+  updateDoc,
 } from 'firebase/firestore';
 import { app } from './firebase';
-
 const firestoreDB = getFirestore(app);
 
 function App() {
