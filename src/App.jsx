@@ -11,7 +11,7 @@ import {
   getFirestore,
   updateDoc,
 } from 'firebase/firestore';
-import { app } from './firebase';
+import { app, putData } from './firebase';
 const firestoreDB = getFirestore(app);
 
 function App() {
@@ -60,6 +60,10 @@ function App() {
     });
   };
 
+  const putDataToRealtimeDB = () => {
+    putData('root/a/b', { id: 1 });
+  };
+
   const update = async () => {
     const docRef = doc(firestoreDB, 'cities', 'GzoV5dwCZs8RAC15YKzi');
     const res = await updateDoc(docRef, {
@@ -76,6 +80,7 @@ function App() {
       <button onClick={getDocument}>Get data</button>
       <button onClick={getDocumentsByQuery}>Getting data by query</button>
       <button onClick={update}>Update city docs</button>
+      <button onClick={putDataToRealtimeDB}>Realtime DB</button>
     </div>
   );
 }
