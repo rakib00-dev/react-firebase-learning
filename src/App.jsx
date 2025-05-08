@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   doc,
   getDoc,
@@ -11,7 +11,8 @@ import {
   getFirestore,
   updateDoc,
 } from 'firebase/firestore';
-import { app, putData } from './firebase';
+import { app, putData, realtimeDB } from './firebase';
+import { onValue, ref } from 'firebase/database';
 const firestoreDB = getFirestore(app);
 
 function App() {
@@ -73,8 +74,18 @@ function App() {
     console.log(res);
   };
 
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    onValue(ref(realtimeDB, 'grandfather/father/child'), (snapshot) => {
+      console.log(snapshot.val().name);
+      setName(snapshot.val().name);
+    });
+  }, []);
+
   return (
     <div className="App">
+      <h1>My name is {name}</h1>
       <button onClick={writeData}>Add data</button>
       <button onClick={makeSubData}>Put sub data</button>
       <button onClick={getDocument}>Get data</button>
