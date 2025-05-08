@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { set, ref, getDatabase } from 'firebase/database';
+import { set, ref, getDatabase, get, child } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_apiKey,
@@ -16,4 +16,10 @@ export const realtimeDB = getDatabase(app);
 
 export const putData = (key, data) => {
   set(ref(realtimeDB, key), data);
+};
+
+export const getdata = () => {
+  get(child(ref(realtimeDB), 'grandfather')).then((snapshot) => {
+    console.log(snapshot.val());
+  });
 };

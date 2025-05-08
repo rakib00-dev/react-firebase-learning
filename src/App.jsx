@@ -61,7 +61,7 @@ function App() {
   };
 
   const putDataToRealtimeDB = () => {
-    putData('root/a/b', { id: 1 });
+    putData('grandfather/father/child1', { id: 2, name: 'child2' });
   };
 
   const update = async () => {
